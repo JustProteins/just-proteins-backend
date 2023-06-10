@@ -1,1 +1,1 @@
-# just-proteins-backend
+# JustProteins - Backend
