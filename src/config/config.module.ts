@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import { EnvModule } from "./env/env.module";
+import { EnvModule } from './env/env.module';
 
 @Module({
-    imports: [EnvModule]
+  imports: [EnvModule],
 })
 export class ConfigModule {}

@@ -1,5 +1,5 @@
 export interface AppNamespace {
-    nodeEnv: string;
-    appName: string;
-    port: number;
+  nodeEnv: string;
+  appName: string;
+  port: number;
 }
