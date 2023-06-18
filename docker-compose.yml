@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+  api:
+    container_name: api
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    volumes:
+      - ./:/usr/src/just-proteins-backend
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+      APP_NAME: ${APP_NAME}
+    command: npm run start:dev
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - redis
+      - postgres
+      - pgadmin
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - just-proteins-redis:/data
+
+  postgres:
+    container_name: postgres
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - just-proteins-postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    links:
+      - postgres:postgres
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    ports:
+      - "${PGADMIN_PORT}:${PGADMIN_PORT}"
+    volumes:
+      - just-proteins-pgadmin:/root/.pgadmin
+
+volumes:
+  just-proteins-pgadmin:
+  just-proteins-postgres:
+  just-proteins-redis:
