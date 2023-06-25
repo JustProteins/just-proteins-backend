@@ -3,3 +3,8 @@ export interface AppNamespace {
   appName: string;
   port: number;
 }
+
+export interface RedisNamespace {
+  port: number;
+  host: string;
+}

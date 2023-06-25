@@ -3,9 +3,9 @@ import { registerAs } from "@nestjs/config";
 import { Namespace } from "../types/env.enum";
 
 export const postgresNamespace = registerAs(Namespace.POSTGRES, () => ({
-    postgresDb: process.env.POSTGRES_DB,
-    postgresUser: process.env.POSTGRES_USER,
-    postgresPassword: process.env.POSTGRES_PASSWORD,
-    postgresPort: parseInt(process.env.POSTGRES_PORT),
-    postgresHost: process.env.POSTGRES_HOST,
+    dbName: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    port: parseInt(process.env.POSTGRES_PORT),
+    host: process.env.POSTGRES_HOST,
 }));
